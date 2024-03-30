@@ -3,6 +3,6 @@ package de.benevolo;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-class GreetingResourceIT extends GreetingResourceTest {
+class EventResourceIT extends EventResourceTest {
     // Execute the same tests but in packaged mode.
 }
