@@ -24,10 +24,17 @@ public class EventResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> events() {
-        Event event = new Event();
-        event.setName("Event 1");
-        event.setDescription("Test Description");
-        event.setDate(new Date());
-        return List.of(event);
+        return eventRepository.listAll();
+    }
+
+    @Transactional
+    @DELETE
+    @Path("{id}")
+    public void delete(@PathParam("id") Long id) {
+        if (!eventRepository.deleteById(id)) {
+            throw new WebApplicationException(404);
+        } else {
+            eventRepository.deleteById(id);
+        }
     }
 }
