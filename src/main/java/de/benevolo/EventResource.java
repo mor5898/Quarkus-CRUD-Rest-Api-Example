@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.Date;
 import java.util.List;
@@ -35,6 +36,25 @@ public class EventResource {
             throw new WebApplicationException(404);
         } else {
             eventRepository.deleteById(id);
+        }
+    }
+
+    @Transactional
+    @PUT
+    @Path("{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response update(@PathParam("id") long id, Event event) {
+        if (eventRepository.findById(id) == null) {
+            eventRepository.persist(event);
+            return Response.status(201).build();
+        } else {
+            Event eventToChange = eventRepository.findById(id);
+            eventToChange.setDate(event.getDate());
+            eventToChange.setName(event.getName());
+            eventToChange.setDescription(event.getDescription());
+            eventRepository.persist(eventToChange);
+            return Response.status(205).build();
         }
     }
 }
