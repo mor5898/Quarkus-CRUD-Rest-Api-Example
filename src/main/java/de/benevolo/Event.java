@@ -3,13 +3,13 @@ package de.benevolo;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 public class Event extends PanacheEntity {
     private String name;
     private String description;
-    private Date date;
+    private LocalDateTime date;
 
 	public String getName() {
 		return name;
@@ -19,11 +19,11 @@ public class Event extends PanacheEntity {
 		this.name = name;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
